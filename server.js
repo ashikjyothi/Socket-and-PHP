@@ -1,6 +1,5 @@
 var socket 	= require('socket.io'),
 	express	= require('express'),
-	https	= require('https'),
 	http 	= require('http'),
 	logger 	= require('winston');
 
@@ -17,6 +16,7 @@ function emitNewOrder(http_server){
 	io.sockets.on('connection',function(socket){
 
 		socket.on("new_order",function(data){
+			console.log(data);
 			io.emit("new_order",data)
 		})
 	});
@@ -24,3 +24,8 @@ function emitNewOrder(http_server){
 
 
 emitNewOrder(http_server);
+
+app.get('/', function (req, res) {
+	console.log("req")
+  res.send('hello world')
+})
